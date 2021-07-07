@@ -3,6 +3,7 @@
     package="com.example.interop">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,6 +11,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Interop">
+        <activity
+            android:name=".AndroidViewActivity"
+            android:exported="true"
+            android:label="@string/title_activity_android_view"
+            android:theme="@style/Theme.Interop.NoActionBar" />
+        <activity
+            android:name=".ComposeAct"
+            android:exported="true" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

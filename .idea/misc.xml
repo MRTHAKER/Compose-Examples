@@ -3,7 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/admin/AndroidStudioProjects/interop/app/src/main/res/layout/activity_compose.xml" value="0.18659420289855072" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/interop/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/interop/app/src/main/res/layout/custom_email_validator.xml" value="0.15729166666666666" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/interop/app/src/main/res/layout/row_news_item.xml" value="0.10955710955710955" />
       </map>
     </option>

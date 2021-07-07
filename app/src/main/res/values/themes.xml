@@ -22,8 +22,9 @@
     <style name="Theme.Interop.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.Interop.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
     <style name="RoundedCorner">
-     <item name="cornerFamily">rounded</item>
+        <item name="cornerFamily">rounded</item>
         <item name="cornerSize">16dp</item>
     </style>
 </resources>

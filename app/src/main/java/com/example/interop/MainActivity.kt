@@ -29,7 +29,6 @@ import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity(), RvClickListener, View.OnClickListener {
     lateinit var binding: ActivityMainBinding
-    lateinit var text: MutableState<String>
     lateinit var categoryList: MutableState<List<String>>
 
     @ExperimentalMaterialApi
@@ -39,9 +38,9 @@ class MainActivity : AppCompatActivity(), RvClickListener, View.OnClickListener 
         binding.itemclick = this@MainActivity
         binding.click = this@MainActivity
         setContentView(binding.root)
-        binding.composeToolbar.setContent {
-            text = rememberSaveable { mutableStateOf("") }
-            ShowToolbar()
+        binding.composeToolbar.apply {
+            text = mutableStateOf("")
+            onImageClick = { getNews() }
         }
         binding.composeChips.setContent {
             categoryList = rememberSaveable {
@@ -67,9 +66,9 @@ class MainActivity : AppCompatActivity(), RvClickListener, View.OnClickListener 
                 .fillMaxWidth(), elevation = 7.dp
         ) {
             TextField(
-                value = text.value,
+                value = binding.composeToolbar.text.value,
                 modifier = Modifier.fillMaxWidth(),
-                onValueChange = { text.value = it },
+                onValueChange = { binding.composeToolbar.text.value = it },
                 label = {
                     Text(
                         text = "Search",
@@ -96,12 +95,12 @@ class MainActivity : AppCompatActivity(), RvClickListener, View.OnClickListener 
         Surface(
             modifier = Modifier
                 .padding(end = 10.dp), onClick = {
-                if (text.value != category) {
-                    text.value = category
+                if (binding.composeToolbar.text.value != category) {
+                    binding.composeToolbar.text.value = category
                     getNews()
                 }
             },
-            shape = MaterialTheme.shapes.large, color = Color.Cyan, border = BorderStroke(
+            shape = MaterialTheme.shapes.medium, color = Color.Cyan, border = BorderStroke(
                 1.dp,
                 Color.Black
             )
@@ -121,8 +120,9 @@ class MainActivity : AppCompatActivity(), RvClickListener, View.OnClickListener 
 
     }
 
-    private fun getNews() = CoroutineScope(Dispatchers.IO).launch {
-        val c = NewsService.newsInstance.getNews(text.value, 1)
+    private fun getNews() {
+        CoroutineScope(Dispatchers.IO).launch {
+            val c = NewsService.newsInstance.getNews(binding.composeToolbar.text.value, 1)
             c.categories = listOf(
                 "Entertainment",
                 "Health",
@@ -131,7 +131,8 @@ class MainActivity : AppCompatActivity(), RvClickListener, View.OnClickListener 
                 "Sports",
                 "Technology"
             )
-        binding.model = c
-        categoryList.value = c.categories
+            binding.model = c
+            categoryList.value = c.categories
+        }
     }
 }
